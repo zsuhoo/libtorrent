@@ -266,11 +266,15 @@ TORRENT_TEST(session_stats_alert)
 
 	auto const* h = alert_cast<session_stats_header_alert>(alerts[0]);
 	TEST_CHECK(h != nullptr);
+#ifndef TORRENT_DISABLE_LOGGING
 	TEST_CHECK(h->message().find("session stats header: ") != std::string::npos);
+#endif
 
 	auto const* v = alert_cast<session_stats_alert>(alerts[1]);
 	TEST_CHECK(v != nullptr);
+#ifndef TORRENT_DISABLE_LOGGING
 	TEST_CHECK(v->message().find("session stats (") != std::string::npos);
+#endif
 }
 
 TORRENT_TEST(dht_sample_infohashes_alert)
